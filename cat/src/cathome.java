@@ -1,51 +1,74 @@
 import java.util.*;
 import java.util.ArrayList;
 
+//父猫类
+abstract class cat {
+    String name;
+    int age;
+    double price;
 
-    //父猫类
-    class cat
-    {
-        String name;
-        int age;
-        double price;
-        void tostring()
-        {
 
-        }
-        public cat(String name,int age,double price){
-            this.age=age;
-            this.name=name;
-            this.price=price;
-        }
 
-        void copy(cat a){
-            this.price=a.price;
-            this.name=a.name;
-            this.age=a.age;
-        }
+    void cat(String name, int age, double price){
+        this.name=name;
+        this.price=price;
+        this.age=age;
+    } ;
+    abstract void tostring();
 
-    }
-    //橘猫类
+
+
+
+}
+//橘猫类
     class OrangeCat extends cat
     {
+        public OrangeCat(int age,String name){
+            this.age=age;
+            this.name=name;
+            this.price=200;
+        }
         boolean isFat;
         public OrangeCat(String name,int age)
         {
-            super(name,age,200);
+            this.age=age;
+            this.name=name;
         }
+        @Override
+       void tostring(){
+
+        }
+
+
     }
     //黑猫类
     class BlackCat extends cat{
 
         public BlackCat(String name,int age)
         {
-            super(name,age,350);
+            this.name=name;
+            this.age=age;
+            this.price=350;
         }
+
+        @Override
+        void tostring(){
+
+        }
+
     }
     //不喜欢的猫类
     class WhiteCat extends cat{
-        public WhiteCat(String name,int age){
-            super(name,age,100);
+        public WhiteCat(String name,int age,double price){
+            this.age=age;
+            this.name=name;
+            this.price=price;
+        }
+
+
+        @Override
+        void tostring(){
+
         }
 
     }
@@ -182,9 +205,9 @@ import java.util.ArrayList;
                     Random ran=new Random(a);
                     int x=ran.nextInt(a);                  //得随机数
 
-                    cat z=new cat(CatName.get(x).name,CatName.get(x).age,CatName.get(x).price);
+                    //BlackCat z=new BlackCat(CatName.get(x).name,CatName.get(x).age,CatName.get(x).price);
                     //System.out.println("here");
-                    CatNameing.add(z);                     //在rua猫类增加
+                    CatNameing.add(CatName.get(x));                     //在rua猫类增加
                     CatName.remove(x);                     //未rua猫类删除
                     CustomerNames.add(thegay);             //顾客列表类增加
                     ALLruatimes+=thegay.ruatimes;          //得所有顾客rua猫次数之和
@@ -205,12 +228,12 @@ import java.util.ArrayList;
     //测试
     class test{
         public static void main(String[] args){
-            cat one=new cat("one",5,5);
+            BlackCat one=new BlackCat("one",5);
             ArrayList<cat>a=new ArrayList<cat>();
             a.add(one);
             //System.out.println("here");
 
-            cat cattwo=new cat("sadf",25,35);
+            cat cattwo=new WhiteCat("sadf",25,35);
             MyCatCafe MyCatCafeone=new MyCatCafe(20,a);
             MyCatCafeone.Buy(cattwo);
             Customer guke=new Customer("guke",2,2021,11,4,0,0,0);
