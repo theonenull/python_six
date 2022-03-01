@@ -78,19 +78,19 @@ class MainActivity : AppCompatActivity() {
             if (username.length < 8 || username.length > 12 || password.length < 8 || password.length > 12) {
                 Toast.makeText(this, "请输入8—12位账号及密码", Toast.LENGTH_SHORT).show()
             } else {
-                val client = OkHttpClient()
-
+                thread {
+                val client:OkHttpClient = OkHttpClient()
                 val requestBody =
                     FormBody.Builder().add("userName", username).add("passWord", password).build()
 
                 Log.d("MainActivity", "web")
 
 
-                thread {
+
                     val request = Request.Builder().url("http://39.107.65.181:8989/user/login")
                         .post(requestBody).build()
                     val response = client.newCall(request).execute()
-                    val responseDate = response.body?.string()
+                    val responseDate = response.body()?.string()
                     if (responseDate == "true") {
                         val editor = prefs.edit()
                         if (binding.checkBox.isChecked) {
@@ -148,7 +148,7 @@ class MainActivity : AppCompatActivity() {
                             .post(requestBody)
                             .build()
                     val response = client.newCall(request).execute()
-                    val responseDate = response.body?.string()
+                    val responseDate = response.body()?.string()
                     Looper.prepare()
                     Toast.makeText(this, responseDate, Toast.LENGTH_SHORT).show()
                     Looper.loop()

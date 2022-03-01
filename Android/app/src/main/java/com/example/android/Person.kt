@@ -61,7 +61,7 @@ class person : AppCompatActivity() {
                     .url("http://39.107.65.181:8989/userBook/list?userName=$userName").get()
                     .build()
             val response1 = client1.newCall(request1).execute()
-            val v = response1.body?.string()
+            val v = response1.body()?.string()
             val json = JSONArray(v)
             if(json.length()==0){
                 booklist.clear()
@@ -81,7 +81,7 @@ class person : AppCompatActivity() {
                             .get()
                             .build()
                     val response2 = client2.newCall(request2).execute()
-                    val v2 = response2.body?.string()
+                    val v2 = response2.body()?.string()
                     val json2 = JSONObject(v2)
                     booklist.add(
                         book(

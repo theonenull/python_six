@@ -72,7 +72,7 @@ class bookadapter(val bookList: List<book>, val Activity: Activity,var username:
                                     .get()
                                     .build()
                             val response1 = client1.newCall(request1).execute()
-                            val v = response1.body?.string()
+                            val v = response1.body()?.string()
 //                      /userBook/insert
                             if(v=="true"){
                             Looper.prepare()

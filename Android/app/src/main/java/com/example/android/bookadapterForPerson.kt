@@ -74,7 +74,7 @@ class bookadapterForPerson(val bookList: List<book>, val Activity: Activity,val 
                                     .get()
                                     .build()
                             val response1 = client1.newCall(request1).execute()
-                            val v = response1.body?.string()
+                            val v = response1.body()?.string()
 //                      /userBook/insert
                             Looper.prepare()
                             Toast.makeText(Activity.baseContext, "取消收藏完成", Toast.LENGTH_SHORT).show()

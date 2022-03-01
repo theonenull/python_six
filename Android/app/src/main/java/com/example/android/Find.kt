@@ -42,7 +42,8 @@ class Find : AppCompatActivity() {
                     val client1 = OkHttpClient()
                     val request1= Request.Builder().url("http://39.107.65.181:8989/getBook/show").build()
                     val response1=client1.newCall(request1).execute()
-                    val responseDate1=response1.body?.string()
+
+                    val responseDate1=response1.body()?.string()
                     if(responseDate1!=null){
                         val json1= JSONArray(responseDate1)
                         for(i in 0 until json1.length()){
@@ -84,7 +85,7 @@ class Find : AppCompatActivity() {
                 Log.d("MainActivity","web")
                 val request= Request.Builder().url("http://39.107.65.181:8989/getBook/search?bookName=$bookname").get().build()
                 val response=client.newCall(request).execute()
-                val responseDate=response.body?.string()
+                val responseDate=response.body()?.string()
                 if(responseDate!=null){
 
                     book_list.clear()

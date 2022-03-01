@@ -70,7 +70,7 @@ class readActivity : AppCompatActivity() {
         val clientForChapter = OkHttpClient()
         val request2 =Request.Builder().url("http://39.107.65.181:8989//getContext/getChapter?bookName=$bookname").build()
         val responseForChapter=clientForChapter.newCall(request2).execute()
-        val temp=responseForChapter.body?.string()
+        val temp=responseForChapter.body()?.string()
         val json = JSONArray(temp)
         for(i in 0 until json.length()){
             thebookChapter.add(bookChapter(json.getJSONObject(i).getString("bookChapter")))
@@ -95,7 +95,7 @@ class readActivity : AppCompatActivity() {
                     Request.Builder().url("http://39.107.65.181:8989/getContext/getText?bookName=$bookname&bookChapter=$bookChapter")
                         .build()
                 val response1 = client1.newCall(request1).execute()
-                val v=response1.body?.string()
+                val v=response1.body()?.string()
                 val jsonObject = JSONObject(v)
                 val b:String=jsonObject.getString("bookContext")
                 load(b)
