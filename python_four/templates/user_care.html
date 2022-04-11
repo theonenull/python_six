@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body style="text-align: center">
+    <h1>{{ list_html['user'] }}的收藏</h1>
+    <table align="center" width="300" border="1">
+        {% for i in list_html['list'] %}
+        <tr>
+            <td>店名</td>
+            <td>{{ i[0] }}</td>、
+            <td><a href="http://127.0.0.1:5000/delete/user_care/{{ i[0] }}/{{ list_html['user'] }}"> 删除</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

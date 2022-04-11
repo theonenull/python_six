@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<div>
+    <img src="{{ list_for_html['picture'] }}">
+</div>
+<body style="text-align: center">
+    <h3>骑手页面</h3>
+    <h1>{{ list_for_html['user'] }}</h1>
+    <table border="2" align="center" width="250">
+    <h2>订单详情</h2>
+    <tr><th>顾客</th>
+        <th>店名</th>
+    </tr>
+        {% for i in list_for_html['list'] %}
+            <tr style="text-align: center">
+            <th>{{ i[1] }}</th>
+            <th>{{ i[2] }}</th>
+            </tr>
+        {% endfor %}
+    </table>
+    <table border="2" align="center" width="250">
+    <h2>订单详情</h2>
+    <tr><th>菜名</th>
+        <th>顾客</th>
+        <th>操作</th>
+    </tr>
+        {% for i in list_for_html['all_order'] %}
+            <tr style="text-align: center">
+            <th>{{ i[1] }}</th>
+            <th>{{ i[2] }}</th>
+            <th><a href="http://127.0.0.1:5000/rider/{{ list_for_html['user'] }}/business/{{ i[2] }}">接单</a>
+            </th></tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

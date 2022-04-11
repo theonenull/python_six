@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body style="text-align:center ">
+<img src="{{ list_for_html['picture'] }}" width="128" height="128" />
+<h1>welcome {{ list_for_html['user'] }}</h1>
+<table style="text-align:center " align="center" width="300">
+    <th><a href="http://127.0.0.1:5000/user_care/{{ list_for_html['user'] }}" methods="get">我的收藏</a></th>
+    <th><a href="http://127.0.0.1:5000/user_friend/{{ list_for_html['user'] }}" methods="get">朋友</a></th>
+    <th><a href="http://127.0.0.1:5000/user/{{ list_for_html['user'] }}" methods="post">注销</a></th>
+    <th><a href="http://127.0.0.1:5000/user_order/{{ list_for_html['user'] }}" methods="post">订单</a></th>
+    <th><a href="http://127.0.0.1:5000/user/change/{{ list_for_html['user'] }}" methods="post">修改密码及头像</a></th>
+</table>
+<table border="2" align="center" width="600">
+           {% for i in list_for_html['list'] %}
+            <tr>
+                <td>{{ i[0] }}</td>
+                <td>{{ i[1] }}</td>
+                <td><a href="http://127.0.0.1:5000/business/{{ i[1] }}/{{ list_for_html['user'] }}" >查看该店菜品</a></td>
+            <td><a href="http://127.0.0.1:5000/user_care/{{ i[1] }}/{{ list_for_html['user'] }}" >收藏该店</a></td>
+            </tr>
+        {% endfor  %}
+    </table>
+
+</body>
+</html>

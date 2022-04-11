@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<div>
+    <img src="{{ list_for_html['picture'] }}">
+</div>
+<body style="text-align: center">
+    <h3>商家页面</h3>
+    <h1>{{ list_for_html['user'] }}</h1>
+    <table border="2" align="center" width="250">
+    <h2>订单详情</h2>
+    <tr><th>菜名</th>
+        <th>顾客</th>
+    </tr>
+        {% for i in list_for_html['list'] %}
+            <tr style="text-align: center">
+            <th>{{ i[0] }}</th>
+            <th>{{ i[1] }}</th>
+            </tr>
+        {% endfor %}
+    </table>
+    <table align="center" border="2" width="250">
+        <h2>本店菜品</h2>
+    <tr>
+        <th>菜名</th>
+        <th>价格</th>
+    </tr>
+        {% for j in list_for_html['list_for_goods'] %}
+            <tr>
+                <th>{{ j[0] }}</th>
+                <th>{{ j[1] }}</th>
+            </tr>
+        {% endfor %}
+    </table>
+    <a href="http://127.0.0.1:5000/business_add/{{ list_for_html['user']}}">添加菜品</a>
+</body>
+</html>
