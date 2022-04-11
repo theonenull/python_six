@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .div_all{
+        position: absolute;
+        display: block;
+        width: 1457px;
+        height: 761px;
+        background-color:rgba(192, 240, 255, 0.945);
+        margin: auto;
+    }
+    .change_input2{
+        display: block;
+        margin:auto;
+        margin-top:100px;
+        width: 500px;
+        height: 40px;
+        border-radius:15px;
+        border: 0ch;
+        outline: none;
+    }
+    .change_input{
+        display: block;
+        margin:auto;
+        margin-top: 50px;
+        width: 500px;
+        height: 40px;
+        border-radius:15px;
+        border: 0ch;
+        outline: none;
+    }
+    .button{
+        display: block;
+        margin: auto;
+        margin-top: 100px;
+        width: 200px;
+        height: 40px;
+        background-color: aqua;
+
+
+    }
+</style>
+<script>
+    function send(){
+        xml=new XMLHttpRequest()
+        url="http://127.0.0.1:5000/changedata"
+        var cookie=document.cookie.split(';')
+        console.log(cookie)
+        xml.open('POST',url,true)
+        xml.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        xml.send("userName="+document.getElementById("userName").value+"&userCode="+cookie[0]+"&userPhoto="+document.getElementById('userPhoto').value+"&userMotto="+document.getElementById("userMotto").value);
+        xml.onreadystatechange=function() {
+            if (xml.readyState === 4 && xml.status === 200)
+                xml.onload = function () {
+                    if(xml.responseText==="YES"){
+                        alert("修改成功，即将跳转")
+                        window.location='http://127.0.0.1:5000/person';
+                    }
+                    else{
+                        alert("出现问题，重新尝试")
+                    }
+
+                }
+        }
+    }
+</script>
+<body>
+    <div class="div_all">
+    <input type="text" placeholder="用户名" class="change_input2" required id="userName">
+    <input type="text" placeholder="图片地址" class="change_input" required id="userPhoto">
+    <input type="text" placeholder="个性签名" class="change_input" required id="userMotto">
+    <button class="button" onclick="send()">
+        提交
+    </button>
+    </div>
+</body>
+</html>

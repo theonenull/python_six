@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/socket.io/1.5.1/socket.io.min.js"></script>
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+<style>
+    .all{
+        display: block;
+        margin: auto;
+        background-color: rgba(112, 158, 158, 0.938);
+        width: 1457px;
+        height: 761px;
+    }
+    .up{
+        position: absolute;
+        display: block;
+        margin: auto;
+        background-color: rgb(163, 157, 180);
+        width: 1457px;
+        height: 200px;
+        background:url("../static/img.png");
+    }
+    .person_photo{
+        position: absolute;
+        display: block;
+        width: 200px;
+        height: 200px;
+        background-color: rgb(77, 119, 143);
+        margin-top: 100px;
+        margin-left: 200px;
+        background-size:cover;
+    }
+    .person_name{
+        position: absolute;
+        display: block;
+        height: 50px;
+        width: 100px;
+        background-color: rgb(174, 247, 174);
+        margin-top: 250px;
+        margin-left: 550px;
+        line-height: 50px;
+        text-align: center;
+        font-size: 20px;
+        border-radius:25px;
+    }
+    .person_motto{
+        position: absolute;
+        display: block;
+        height: 50px;
+        width: 120px;
+        background-color: rgb(174, 247, 174);
+        margin-top: 310px;
+        margin-left: 550px;
+        line-height: 50px;
+        text-align: center;
+        font-size: 20px;
+        border-radius:25px;
+    }
+    .userMotto{
+        position: absolute;
+        display: block;
+        height: 50px;
+        width: 500px;
+        background-color: rgb(174, 247, 174);
+        margin-top: 310px;
+        margin-left: 700px;
+        line-height: 50px;
+        text-align: center;
+        font-size: 5px;
+        border-radius:25px;
+    }
+    .userName{
+        position: absolute;
+        display: block;
+        height: 50px;
+        width: 500px;
+        background-color: rgb(174, 247, 174);
+        margin-top: 250px;
+        margin-left: 700px;
+        line-height: 50px;
+        text-align: center;
+        font-size: 5px;
+        border-radius:25px;
+    }
+    .userButton{
+        position: absolute;
+        display: block;
+        height: 50px;
+        width: 150px;
+        background-color: rgb(174, 247, 174);
+        margin-top: 500px;
+        margin-left: 700px;
+        line-height: 50px;
+        text-align: center;
+        font-size: 20px;
+        border-radius:10px;
+    }
+    .listFriend{
+        position: absolute;
+        display: block;
+        width: 200px;
+        height: 400px;
+        background-color: rgb(77, 119, 143);
+        margin-top: 350px;
+        margin-left: 200px;
+        text-align: center;
+        font-size: 25px;
+    }
+    .listFriend2{
+        position: absolute;
+        display: block;
+        width: 200px;
+        height: 370px;
+        background-color: rgb(16, 93, 138);
+        margin-top: 0px;
+        margin-left: 0px;
+        text-align: center;
+        font-size: 25px;
+    }
+    .massage{
+        display: block;
+        position:absolute;
+        width: 30px;
+        height: 30px;
+        background: url('../static/massage.png');
+        margin-top: 400px;
+        margin-left: 580px;
+        background-color: aquamarine;
+        background-size: cover;
+        
+    }
+    .massage2{
+        display: block;
+        position:absolute;
+        width: 70px;
+        height: 30px;
+        font-size: 6px;
+        line-height: 30px;
+        margin-top: 400px;
+        margin-left: 620px;
+        background-color: rgb(140, 127, 255);
+        text-align: center;
+        border-radius: 10px;
+    }
+    .listApply{
+        position:absolute;
+        display: block;
+        height: 200px;
+        width: 700px;
+        margin-top: 450px;
+        margin-left:550px; 
+        background-color: black;
+        border-radius: 20px;
+        
+    }
+</style>
+<body>
+    
+    <div class="all">
+        <div class="up">
+
+        </div>
+        
+        <div class="person_photo" id="userPhoto">
+            
+        </div>
+
+        <div class="person_name">
+            用户名:
+        </div>
+
+        <div id="userName" class="userName">
+
+        </div>
+
+        <div class="person_motto" >
+            个性签名:
+
+        </div>
+        <div class="userMotto" id="userMotto">
+
+        </div>
+
+
+    </div>
+</body>
+<script>
+    $(document).ready(function () {
+        document.getElementById('userMotto').innerText="{{ data['userMotto'] }}"
+        document.getElementById('userPhoto').style.background='url('+ "{{data['userPhoto']}}"+')'
+        document.getElementById('userName').innerText="{{ data['userName'] }}"
+        console.log(document.getElementById('userPhoto').style.background)
+        document.getElementById('userPhoto').style.backgroundSize="cover"
+    })
+</script>
+</html>

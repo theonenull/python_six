@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/socket.io/1.5.1/socket.io.min.js"></script>
+
+
+<style>
+    .body_login{
+        
+        height: 900px;
+        width: 1700px;
+        background-image: url(../static/10001.jpg);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        margin: auto;
+    }
+    .body_login>.input_number{
+        position:absolute;
+        display: block;
+        color:black;
+        width: 200px;
+        height: 25px;
+        margin-top: 490px;
+        margin-left:900px;
+        border-radius: 10px;
+        
+    }
+    .body_login>.input_number1{
+        position:absolute;
+        display: block;
+        color:black;
+        width: 200px;
+        height: 25px;
+        margin-top: 450px;
+        margin-left:900px;
+        border-radius: 10px;
+        
+    }
+    .body_login .button_first_login{
+        position: absolute;
+        display: inline-block;
+        width: 80px;
+        height: 40px;
+        background-color: rgba(0, 255, 200, 0.877);
+        border-radius: 10px;
+        margin-top: 530px;
+        margin-left: 900px;
+    }
+    .body_login .button_first_register{
+        position: absolute;
+        display: inline-block;
+        width: 80px;
+        height: 40px;
+        background-color: rgba(0, 255, 200, 0.877);
+        border-radius: 10px;
+        margin-top: 530px;
+        margin-left: 1020px;
+    }
+</style>
+<script>
+    function login(){
+        var firstname=document.getElementById("firstname").value
+        var password=document.getElementById("password").value
+        xml=new XMLHttpRequest()
+        url='http://127.0.0.1:5000/login'
+
+        xml.open('POST',url,true)
+        xml.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+
+
+        xml.send("firstname="+firstname+"&password="+password);
+        xml.onreadystatechange=function(){
+            if(xml.readyState===4 && xml.status===200)
+            xml.onload=function (){
+            console.log("one")
+            console.log(xml.responseText)
+            console.log("two")
+            var responseJson=JSON.parse(xml.responseText)
+            console.log(responseJson['status'])
+            console.log(document.cookie)
+            if(responseJson['status']==="ALLOW"){
+                if(responseJson['cookie']!=null)
+                document.cookie=responseJson['cookie']+";max-age=604800"
+                document.cookie=""
+                window.location="http://127.0.0.1:5000/talkRoom"
+                }
+            else if(responseJson['status']==="NOTALLOWED"){
+                alert("输入有误！请重新输入")
+            }
+            console.log("cookie:"+document.cookie)
+        }
+        }
+
+    }
+    function register(){
+        var firstname=document.getElementById("firstname").value
+        var password=document.getElementById("password").value
+        xml=new XMLHttpRequest()
+        url="http://127.0.0.1:5000/register"
+        xml.open('POST',url,true)
+        xml.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        xml.send("firstname="+firstname+"&password="+password);
+        xml.onreadystatechange=function(){
+            if(xml.readyState===4 && xml.status===200)
+            xml.onload=function (){
+            console.log("one")
+            console.log(firstname)
+            console.log(password)
+            console.log(xml.responseText)
+            console.log("two")
+            var json=JSON.parse(xml.responseText)
+            if(json.data==="ALLOW"){
+                document.cookie=json.cookie+";max-age=604800"
+                console.log(document.cookie)
+                console.log("xml.responseText:"+json.data)
+                alert("成功注册,请记住您的密码,即将跳转到个人页面")
+                window.location="http://127.0.0.1:5000/talkRoom"
+            }
+            else{
+                alert("用户名已被占用,重新输入")
+            }
+
+        }
+        }
+    }
+</script>
+<body >
+    <div class="body_login">
+        <input class="input_number1" id="firstname" placeholder="用户名">
+        <input class="input_number" id="password" placeholder="密码">
+    
+    <button class="button_first_login" onclick="login()">
+            登录
+    </button>
+    <button class="button_first_register"  onclick="register()">
+        注册
+    </button>
+    </div>
+    
+    
+</body>
+</html>
